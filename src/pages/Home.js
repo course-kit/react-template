@@ -7,11 +7,16 @@ function Home () {
   if (data) {
     const { courses } = data
     return (
-      <div>
+      <div className="Home">
+        <header>
+          <h1>CourseKit React Template</h1>
+        </header>
         {courses.map(course => (
           <section key={course.id} className="CourseSummary">
-            <h2><Link className="no-underline cursor-pointer" to={"/courses/" + course.id}>{course.title}</Link></h2>
-            <p><Link className="no-underline cursor-pointer" to={"/courses/" + course.id}>{course.meta.description}</Link></p>
+            <div>
+              <h2><Link className="no-underline cursor-pointer" to={"/courses/" + course.id}>{course.title}</Link></h2>
+              <p><Link className="no-underline cursor-pointer" to={"/courses/" + course.id}>{course.meta.description}</Link></p>
+            </div>
           </section>
         ))}
       </div>
@@ -24,7 +29,7 @@ function Home () {
   }
   if (isPending) {
     return (
-      <div>Loading...</div>
+      <div className="spinner" />
     )
   }
 }

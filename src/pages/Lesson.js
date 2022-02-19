@@ -1,31 +1,73 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { useAsync } from "react-async"
-import { fetchUserAndLesson } from "../ck"
+import { fetchCourseLessonAndUser } from "../ck"
+import { ChevronDoubleRightIcon } from "@heroicons/react/solid";
+import Vimeo from '@u-wave/react-vimeo'
+import Enroll from "../components/Enroll";
 
 function Lesson () {
   let { courseId, lessonId } = useParams()
-  const { data, error, isPending } = useAsync({ promiseFn: fetchUserAndLesson, courseId, lessonId })
+  const navigate = useNavigate()
+  const { data, error, isPending } = useAsync({ promiseFn: fetchCourseLessonAndUser, courseId, lessonId })
   if (data) {
-    const { lesson, lessonStatus, user, userStatus } = data
-    const { title, html, enrolled } = lesson
-    console.log(lesson)
+    const { course, lesson, lessonStatus, user } = data
+    const { title, html, meta } = lesson
+    function VideoEmbed () {
+      console.log(meta)
+      if (meta.vimeoId) {
+        return (
+          <Vimeo video={meta.vimeoId} responsive />
+        )
+      } else {
+        return (
+          <div />
+        )
+      }
+    }
     function Content () {
       if (lessonStatus === 401) {
         return (
-          <div>Please <button onClick={user.loginRedirect}>log in</button> or enroll to view this lesson</div>
+          <div className="Lesson401">
+            <div>
+              Please <span className="underline cursor-pointer" onClick={user.loginRedirect}>log in</span> or <Enroll text="enroll" style="underline cursor-pointer" /> to view this lesson.
+            </div>
+          </div>
+        )
+      }
+      if (lessonStatus === 403) {
+        return (
+          <div className="Lesson401">
+            <div>
+              Please <Enroll text="enroll" style="underline cursor-pointer" /> to view this lesson.
+            </div>
+          </div>
         )
       }
       if (lessonStatus === 200) {
+        async function completeAndContinue() {
+          const success = await lesson.markComplete()
+          if (success) {
+            const nextLessonId = course.nextLessonId
+            navigate(`/courses/${course.id}/lessons/${nextLessonId}`)
+          }
+        }
         return (
-          <div dangerouslySetInnerHTML={{__html: html}} />
+          <div class="Content">
+            <VideoEmbed />
+            <div className="markdown" dangerouslySetInnerHTML={{__html: html}} />
+            <button className="button-primary icon" onClick={completeAndContinue}>
+              <span>Complete and continue</span>
+              <ChevronDoubleRightIcon />
+            </button>
+          </div>
         )
       }
     }
     return (
-      <div>
+      <div className="Lesson">
         <header>
           <p>
-            <Link to={"/"}>Back to courses</Link>
+            <Link to={"/courses/" + course.id}>Back to {course.title}</Link>
           </p>
           <h1>{ title }</h1>
         </header>
@@ -36,13 +78,14 @@ function Lesson () {
     )
   }
   if (error) {
+    console.log(error)
     return (
       <div>Error</div>
     )
   }
   if (isPending) {
     return (
-      <div>Loading...</div>
+      <div className="spinner" />
     )
   }
 }

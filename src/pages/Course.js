@@ -1,14 +1,33 @@
 import { Link, useParams } from 'react-router-dom'
 import { useAsync } from "react-async"
 import { fetchCourse } from "../ck"
+import { CheckCircleIcon, ChevronDoubleRightIcon } from '@heroicons/react/solid'
+import Enroll from "../components/Enroll";
 
 function Course () {
   let { courseId } = useParams()
   const { data, error, isPending } = useAsync({ promiseFn: fetchCourse, courseId })
   if (data) {
     const { course } = data
-    const { title, html, enrolled, lessons } = course
-    console.log(html)
+    const { title, html, enrolled, lessons, nextLessonId } = course
+    const nextLessonPath = `/courses/${courseId}/lessons/${nextLessonId}`
+    function HeaderContent() {
+      if (enrolled) {
+        return (
+          <div>
+            <div dangerouslySetInnerHTML={{__html: html}} />
+            <Link className="button-primary icon" to={nextLessonPath}>
+              <span>Continue</span>
+              <ChevronDoubleRightIcon />
+            </Link>
+          </div>
+        )
+      } else {
+        return (
+          <Enroll text="Enroll now" style="button-primary icon" />
+        )
+      }
+    }
     return (
       <div className="Course">
         <header>
@@ -16,13 +35,20 @@ function Course () {
             <Link to={"/"}>Back to courses</Link>
           </p>
           <h1>{ title }</h1>
-          <p dangerouslySetInnerHTML={{__html: html}} />
+          <HeaderContent />
         </header>
         <div>
           {lessons.map((lesson, index) => (
             <section key={lesson.id} className="LessonSummary">
-              <h2><Link className="no-underline cursor-pointer" to={"/courses/" + courseId + "/lessons/" + lesson.id}>{index + 1}. {lesson.title}</Link></h2>
-              <p><Link className="no-underline cursor-pointer" to={"/courses/" + courseId + "/lessons/" + lesson.id}>{lesson.meta.description}</Link></p>
+              <div>
+                <div className="title">
+                  <h2>
+                    <Link className="no-underline cursor-pointer" to={"/courses/" + courseId + "/lessons/" + lesson.id}>{index + 1}. {lesson.title}</Link>
+                  </h2>
+                  <CheckCircleIcon className={lesson.complete ? "complete" : ""}/>
+                </div>
+                <p><Link className="no-underline cursor-pointer" to={"/courses/" + courseId + "/lessons/" + lesson.id}>{lesson.meta.description}</Link></p>
+              </div>
             </section>
           ))}
         </div>
@@ -36,7 +62,7 @@ function Course () {
   }
   if (isPending) {
     return (
-      <div>Loading...</div>
+      <div className="spinner" />
     )
   }
 }

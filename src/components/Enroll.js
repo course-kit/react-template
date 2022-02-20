@@ -1,22 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
+import { XIcon } from "@heroicons/react/solid"
 
 Modal.setAppElement('#root')
 
 function Enroll (props) {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = React.useState(false)
+  const [email, setEmail] = React.useState("")
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState(false)
+  const [submitted, setSubmitted] = React.useState(false)
 
   function openModal() {
     setIsOpen(true);
@@ -24,26 +18,75 @@ function Enroll (props) {
 
   function closeModal() {
     setIsOpen(false);
+    setEmail("")
+    setLoading(false)
+    setError(false)
+    setSubmitted(false)
   }
 
+  async function handleSubmit(event) {
+    const url = "/.netlify/functions/enroll"
+    setLoading(true)
+    try {
+      const { status } = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, courseId: props.courseId })
+      })
+      setSubmitted(true)
+      if (status !== 200) {
+        setError(true)
+      }
+    } catch (err) {
+      setSubmitted(true)
+      setError(true)
+      console.log(err)
+    }
+    setLoading(false)
+    event.preventDefault();
+  }
+  function Content () {
+    if (submitted) {
+      if (error) {
+        return (
+          <div className="alert error">Submission failed. Please try again later.</div>
+        )
+      } else {
+        return (
+          <div className="alert success">Success! Please check your email to activate your course.</div>
+        )
+      }
+    } else {
+      return(
+        <div>
+          <p>Please enter your email address to enroll in this course.</p>
+          <div className="form">
+            <input value={email} onChange={e => setEmail(e.target.value)} type="text" name="email" placeholder="Your email" autoFocus />
+            <button className="button-primary" onClick={handleSubmit}>
+              <span>Submit</span>
+              <span className={loading ? "loading" : ""} />
+            </button>
+          </div>
+        </div>
+      )
+    }
+  }
   return (
     <span>
       <span onClick={openModal} className={props.style}>{props.text}</span>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
+        contentLabel="Enroll"
+        className="Modal"
+        overlayClassName="Overlay"
       >
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
+        <div className="close">
+          <XIcon onClick={closeModal} />
+        </div>
+        <Content />
       </Modal>
     </span>
   );

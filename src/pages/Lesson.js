@@ -29,7 +29,7 @@ function Lesson () {
         return (
           <div className="Lesson401">
             <div>
-              Please <span className="underline cursor-pointer" onClick={user.loginRedirect}>log in</span> or <Enroll text="enroll" style="underline cursor-pointer" /> to view this lesson.
+              Please <span className="underline cursor-pointer" onClick={user.loginRedirect}>log in</span> or <Enroll courseId={courseId} text="enroll" style="underline cursor-pointer" /> to view this lesson.
             </div>
           </div>
         )
@@ -38,7 +38,7 @@ function Lesson () {
         return (
           <div className="Lesson401">
             <div>
-              Please <Enroll text="enroll" style="underline cursor-pointer" /> to view this lesson.
+              Please <Enroll courseId={courseId} text="enroll" style="underline cursor-pointer" /> to view this lesson.
             </div>
           </div>
         )

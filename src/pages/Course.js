@@ -11,20 +11,21 @@ function Course () {
     const { course } = data
     const { title, html, enrolled, lessons, nextLessonId } = course
     const nextLessonPath = `/courses/${courseId}/lessons/${nextLessonId}`
+    const isFirstLesson = lessons[0].id === nextLessonId
     function HeaderContent() {
       if (enrolled) {
         return (
           <div>
             <div dangerouslySetInnerHTML={{__html: html}} />
             <Link className="button-primary icon" to={nextLessonPath}>
-              <span>Continue</span>
+              <span>{isFirstLesson ? 'Get started' : 'Continue'}</span>
               <ChevronDoubleRightIcon />
             </Link>
           </div>
         )
       } else {
         return (
-          <Enroll text="Enroll now" style="button-primary icon" />
+          <Enroll courseId={courseId} text="Enroll now" style="button-primary icon" />
         )
       }
     }

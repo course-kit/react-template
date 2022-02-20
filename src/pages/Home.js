@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { useAsync } from "react-async"
 import { fetchCourseSummaries } from "../ck"
+import { BookmarkIcon } from "@heroicons/react/outline";
 
 function Home () {
   const { data, error, isPending } = useAsync(fetchCourseSummaries)
@@ -14,7 +15,10 @@ function Home () {
         {courses.map(course => (
           <section key={course.id} className="CourseSummary">
             <div>
-              <h2><Link className="no-underline cursor-pointer" to={"/courses/" + course.id}>{course.title}</Link></h2>
+              <div className="title">
+                <h2><Link className="no-underline cursor-pointer" to={"/courses/" + course.id}>{course.title}</Link></h2>
+                <BookmarkIcon className={course.enrolled ? "enrolled" : ""}/>
+              </div>
               <p><Link className="no-underline cursor-pointer" to={"/courses/" + course.id}>{course.meta.description}</Link></p>
             </div>
           </section>

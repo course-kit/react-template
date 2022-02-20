@@ -3,10 +3,12 @@ const fetch = require('node-fetch')
 const courses = [
   // Photography for beginners
   {
+    courseId: process.env.COURSE_1_ID,
     enrollmentUrl: process.env.COURSE_1_ENROLLMENT_URL,
   },
   // Advanced photography
   {
+    courseId: process.env.COURSE_2_ID,
     enrollmentUrl: process.env.COURSE_2_ENROLLMENT_URL,
   },
 ]
@@ -23,8 +25,8 @@ async function enrollUser(enrollmentUrl, email) {
 
 exports.handler = async ({ body, headers }) => {
   try {
-    const { enrollmentUrl } = courses.find((course) => course.priceId === priceId)
-    const { email } = body
+    const { email, courseId } = JSON.parse(body)
+    const { enrollmentUrl } = courses.find((course) => course.courseId === courseId)
     await enrollUser(enrollmentUrl, email)
 
     return {

@@ -1,7 +1,7 @@
-import './Loading.css';
+import './Loading.css'
 
 function Loading() {
-  return <div className="spinner" />;
+  return <div className="spinner" />
 }
 
-export default Loading;
+export default Loading

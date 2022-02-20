@@ -3,9 +3,10 @@
   "extends": ["react-app", "prettier"],
   "rules": {
     "prettier/prettier": [
-      "error",
+      "warn",
       {
-        "singleQuote": true
+        "singleQuote": true,
+        "semi": false
       }
     ]
   }

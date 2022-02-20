@@ -1,31 +1,31 @@
-import { Link, useParams } from 'react-router-dom';
-import { useAsync } from 'react-async';
-import { fetchCourseLessonAndUser } from '../ck';
-import LessonUnauthorized from '../components/LessonUnauthorized';
-import LessonForbidden from '../components/LessonForbidden';
-import '../components/LessonNoAccess.css';
-import LessonContent from '../components/LessonContent';
-import Loading from '../components/Loading';
+import { Link, useParams } from 'react-router-dom'
+import { useAsync } from 'react-async'
+import { fetchCourseLessonAndUser } from '../ck'
+import LessonUnauthorized from '../components/LessonUnauthorized'
+import LessonForbidden from '../components/LessonForbidden'
+import '../components/LessonNoAccess.css'
+import LessonContent from '../components/LessonContent'
+import Loading from '../components/Loading'
 
 function Lesson() {
-  let { courseId, lessonId } = useParams();
+  let { courseId, lessonId } = useParams()
   const { data, error, isPending } = useAsync({
     promiseFn: fetchCourseLessonAndUser,
     courseId,
     lessonId,
-  });
+  })
   if (data) {
-    const { course, lesson, lessonStatus, user } = data;
-    const { title } = lesson;
+    const { course, lesson, lessonStatus, user } = data
+    const { title } = lesson
     function Content() {
       if (lessonStatus === 401) {
-        return <LessonUnauthorized courseId={courseId} user={user} />;
+        return <LessonUnauthorized courseId={courseId} user={user} />
       }
       if (lessonStatus === 403) {
-        return <LessonForbidden courseId={courseId} />;
+        return <LessonForbidden courseId={courseId} />
       }
       if (lessonStatus === 200) {
-        return <LessonContent course={course} lesson={lesson} />;
+        return <LessonContent course={course} lesson={lesson} />
       }
     }
     return (
@@ -40,14 +40,14 @@ function Lesson() {
           <Content />
         </div>
       </div>
-    );
+    )
   }
   if (error) {
-    return <div>Error</div>;
+    return <div>Error</div>
   }
   if (isPending) {
-    return <Loading />;
+    return <Loading />
   }
 }
 
-export default Lesson;
+export default Lesson

@@ -1,36 +1,36 @@
-import React from 'react';
-import Modal from 'react-modal';
+import React from 'react'
+import Modal from 'react-modal'
 import {
   XIcon,
   ExclamationCircleIcon,
   CheckCircleIcon,
-} from '@heroicons/react/solid';
-import './EnrollFree.css';
+} from '@heroicons/react/solid'
+import './EnrollFree.css'
 
-Modal.setAppElement('#root');
+Modal.setAppElement('#root')
 
 function EnrollFree(props) {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-  const [email, setEmail] = React.useState('');
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState(false);
-  const [submitted, setSubmitted] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = React.useState(false)
+  const [email, setEmail] = React.useState('')
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState(false)
+  const [submitted, setSubmitted] = React.useState(false)
 
   function openModal() {
-    setIsOpen(true);
+    setIsOpen(true)
   }
 
   function closeModal() {
-    setIsOpen(false);
-    setEmail('');
-    setLoading(false);
-    setError(false);
-    setSubmitted(false);
+    setIsOpen(false)
+    setEmail('')
+    setLoading(false)
+    setError(false)
+    setSubmitted(false)
   }
 
   async function handleSubmit(event) {
-    const url = '/.netlify/functions/enroll';
-    setLoading(true);
+    const url = '/.netlify/functions/enroll'
+    setLoading(true)
     try {
       const { status } = await fetch(url, {
         method: 'POST',
@@ -38,18 +38,18 @@ function EnrollFree(props) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, courseId: props.courseId }),
-      });
-      setSubmitted(true);
+      })
+      setSubmitted(true)
       if (status !== 200) {
-        setError(true);
+        setError(true)
       }
     } catch (err) {
-      setSubmitted(true);
-      setError(true);
-      console.log(err);
+      setSubmitted(true)
+      setError(true)
+      console.log(err)
     }
-    setLoading(false);
-    event.preventDefault();
+    setLoading(false)
+    event.preventDefault()
   }
   function Content() {
     if (submitted) {
@@ -59,7 +59,7 @@ function EnrollFree(props) {
             <ExclamationCircleIcon />
             <span>Submission failed. Please try again later.</span>
           </div>
-        );
+        )
       } else {
         return (
           <div className="alert success">
@@ -68,7 +68,7 @@ function EnrollFree(props) {
               Success! Please check your email to activate your course.
             </span>
           </div>
-        );
+        )
       }
     } else {
       return (
@@ -89,7 +89,7 @@ function EnrollFree(props) {
             </button>
           </div>
         </div>
-      );
+      )
     }
   }
   return (
@@ -110,7 +110,7 @@ function EnrollFree(props) {
         <Content />
       </Modal>
     </span>
-  );
+  )
 }
 
-export default EnrollFree;
+export default EnrollFree

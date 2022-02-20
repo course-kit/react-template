@@ -1,4 +1,4 @@
-import EnrollFree from './EnrollFree';
+import EnrollFree from './EnrollFree'
 
 function LessonUnauthorized(props) {
   return (
@@ -20,7 +20,7 @@ function LessonUnauthorized(props) {
         to view this lesson.
       </div>
     </div>
-  );
+  )
 }
 
-export default LessonUnauthorized;
+export default LessonUnauthorized

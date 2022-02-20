@@ -1,14 +1,14 @@
-import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Course from './pages/Course';
-import Lesson from './pages/Lesson';
-import Footer from './components/Footer';
-import Nav from './components/Nav';
-import { useAsync } from 'react-async';
-import { fetchUser } from './ck';
+import { Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import Course from './pages/Course'
+import Lesson from './pages/Lesson'
+import Footer from './components/Footer'
+import Nav from './components/Nav'
+import { useAsync } from 'react-async'
+import { fetchUser } from './ck'
 
 function App() {
-  const { data, error, isPending } = useAsync(fetchUser);
+  const { data, error, isPending } = useAsync(fetchUser)
   if (data) {
     return (
       <div className="App">
@@ -25,14 +25,14 @@ function App() {
         </main>
         <Footer />
       </div>
-    );
+    )
   }
   if (error) {
-    return <div>Error</div>;
+    return <div>Error</div>
   }
   if (isPending) {
-    return <div className="spinner" />;
+    return <div className="spinner" />
   }
 }
 
-export default App;
+export default App

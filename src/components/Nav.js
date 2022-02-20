@@ -3,7 +3,7 @@ import { fetchUser } from "../ck"
 
 function Nav() {
   function NavButton () {
-    const { data, error, isPending } = useAsync(fetchUser)
+    const { data } = useAsync(fetchUser)
     if (data) {
       const { user } = data
       if (user.isAuthenticated()) {

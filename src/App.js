@@ -5,21 +5,36 @@ import Lesson from './pages/Lesson'
 import Footer from './components/Footer'
 import './App.css';
 import Nav from "./components/Nav";
+import { useAsync } from "react-async";
+import { fetchUser } from "./ck"
 
 function App() {
-  return (
-    <div className="App">
-      <Nav />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/courses/:courseId" element={<Course />} />
-          <Route path="/courses/:courseId/lessons/:lessonId" element={<Lesson />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
-  );
+  const { data, error, isPending } = useAsync(fetchUser)
+  if (data) {
+    return (
+      <div className="App">
+        <Nav />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/courses/:courseId" element={<Course />} />
+            <Route path="/courses/:courseId/lessons/:lessonId" element={<Lesson />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+  if (error) {
+    return (
+      <div>Error</div>
+    )
+  }
+  if (isPending) {
+    return (
+      <div className="spinner" />
+    )
+  }
 }
 
 export default App;

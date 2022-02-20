@@ -7,6 +7,7 @@ function Home () {
   const { data, error, isPending } = useAsync(fetchCourseSummaries)
   if (data) {
     const { courses } = data
+    console.log(courses)
     return (
       <div className="Home">
         <header>

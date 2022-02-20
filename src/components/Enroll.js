@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
-import { XIcon } from "@heroicons/react/solid"
+import { XIcon, ExclamationCircleIcon, CheckCircleIcon } from "@heroicons/react/solid"
 
 Modal.setAppElement('#root')
 
@@ -51,11 +51,17 @@ function Enroll (props) {
     if (submitted) {
       if (error) {
         return (
-          <div className="alert error">Submission failed. Please try again later.</div>
+          <div className="alert error">
+            <ExclamationCircleIcon />
+            <span>Submission failed. Please try again later.</span>
+          </div>
         )
       } else {
         return (
-          <div className="alert success">Success! Please check your email to activate your course.</div>
+          <div className="alert success">
+            <CheckCircleIcon />
+            <span>Success! Please check your email to activate your course.</span>
+          </div>
         )
       }
     } else {

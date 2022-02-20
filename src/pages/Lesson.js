@@ -1,93 +1,53 @@
-import { Link, useParams, useNavigate } from 'react-router-dom'
-import { useAsync } from "react-async"
-import { fetchCourseLessonAndUser } from "../ck"
-import { ChevronDoubleRightIcon } from "@heroicons/react/solid";
-import Vimeo from '@u-wave/react-vimeo'
-import Enroll from "../components/Enroll";
+import { Link, useParams } from 'react-router-dom';
+import { useAsync } from 'react-async';
+import { fetchCourseLessonAndUser } from '../ck';
+import LessonUnauthorized from '../components/LessonUnauthorized';
+import LessonForbidden from '../components/LessonForbidden';
+import '../components/LessonNoAccess.css';
+import LessonContent from '../components/LessonContent';
+import Loading from '../components/Loading';
 
-function Lesson () {
-  let { courseId, lessonId } = useParams()
-  const navigate = useNavigate()
-  const { data, error, isPending } = useAsync({ promiseFn: fetchCourseLessonAndUser, courseId, lessonId })
+function Lesson() {
+  let { courseId, lessonId } = useParams();
+  const { data, error, isPending } = useAsync({
+    promiseFn: fetchCourseLessonAndUser,
+    courseId,
+    lessonId,
+  });
   if (data) {
-    const { course, lesson, lessonStatus, user } = data
-    const { title, html, meta } = lesson
-    function VideoEmbed () {
-      console.log(meta)
-      if (meta.vimeoId) {
-        return (
-          <Vimeo video={meta.vimeoId} responsive />
-        )
-      } else {
-        return (
-          <div />
-        )
-      }
-    }
-    function Content () {
+    const { course, lesson, lessonStatus, user } = data;
+    const { title } = lesson;
+    function Content() {
       if (lessonStatus === 401) {
-        return (
-          <div className="Lesson401">
-            <div>
-              Please <span className="underline cursor-pointer" onClick={user.loginRedirect}>log in</span> or <Enroll courseId={courseId} text="enroll" style="underline cursor-pointer" /> to view this lesson.
-            </div>
-          </div>
-        )
+        return <LessonUnauthorized courseId={courseId} user={user} />;
       }
       if (lessonStatus === 403) {
-        return (
-          <div className="Lesson401">
-            <div>
-              Please <Enroll courseId={courseId} text="enroll" style="underline cursor-pointer" /> to view this lesson.
-            </div>
-          </div>
-        )
+        return <LessonForbidden courseId={courseId} />;
       }
       if (lessonStatus === 200) {
-        async function completeAndContinue() {
-          const success = await lesson.markComplete()
-          if (success) {
-            const nextLessonId = course.nextLessonId
-            navigate(`/courses/${course.id}/lessons/${nextLessonId}`)
-          }
-        }
-        return (
-          <div class="Content">
-            <VideoEmbed />
-            <div className="markdown" dangerouslySetInnerHTML={{__html: html}} />
-            <button className="button-primary icon" onClick={completeAndContinue}>
-              <span>Complete and continue</span>
-              <ChevronDoubleRightIcon />
-            </button>
-          </div>
-        )
+        return <LessonContent course={course} lesson={lesson} />;
       }
     }
     return (
-      <div className="Lesson">
+      <div className="Lesson page">
         <header>
           <p>
-            <Link to={"/courses/" + course.id}>Back to {course.title}</Link>
+            <Link to={'/courses/' + course.id}>Back to {course.title}</Link>
           </p>
-          <h1>{ title }</h1>
+          <h1>{title}</h1>
         </header>
         <div>
           <Content />
         </div>
       </div>
-    )
+    );
   }
   if (error) {
-    console.log(error)
-    return (
-      <div>Error</div>
-    )
+    return <div>Error</div>;
   }
   if (isPending) {
-    return (
-      <div className="spinner" />
-    )
+    return <Loading />;
   }
 }
 
-export default Lesson
+export default Lesson;

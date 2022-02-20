@@ -1,0 +1,9 @@
+.Lesson .Content .markdown {
+  padding-top: 1rem;
+}
+
+.Lesson .Content p {
+  font-size: var(--font-size-sm);
+  color: var(--color-subtle-dark);
+  margin: 0;
+}

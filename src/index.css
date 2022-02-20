@@ -73,6 +73,10 @@ h2 {
   margin-bottom: 1.5rem;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 .no-underline {
   text-decoration: none;
 }
@@ -81,61 +85,45 @@ h2 {
   cursor: pointer;
 }
 
-.Home,
-.Course,
-.Lesson {
+.page {
   width: var(--width-container);
   max-width: 100%;
   margin: 0 auto;
 }
 
-.CourseSummary,
-.LessonSummary {
+.summary {
   border: 1px solid var(--color-subtle-medium);
   border-radius: var(--border-radius);
   margin: 0 auto 2rem;
 }
 
-.CourseSummary > div,
-.LessonSummary > div {
+.summary > div {
   padding: 2rem;
 }
 
-.CourseSummary .title,
-.LessonSummary .title {
+.summary .title {
   display: flex;
   justify-content: space-between;
 }
 
-.CourseSummary .title svg,
-.LessonSummary .title svg {
+.summary .title svg {
   height: 25px;
   width: 25px;
   color: var(--color-subtle-medium);
 }
 
-.CourseSummary .title svg.enrolled {
+.summary .title svg.enrolled {
   color: var(--color-theme-dark);
 }
-.LessonSummary .title svg.complete {
+
+.summary .title svg.complete {
   color: var(--color-button-primary);
 }
 
-.CourseSummary h2,
-.LessonSummary h2 {
-  margin-top: 0
-}
-
-.Lesson .Content .markdown {
-  padding: 1rem 0 2rem;
-}
-
-.Lesson .Content p,
-.CourseSummary p,
-.LessonSummary p {
+.summary p {
   font-size: var(--font-size-sm);
   color: var(--color-subtle-dark);
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .Lesson header,
@@ -147,48 +135,12 @@ h2 {
   text-align: center;
 }
 
-.Lesson header p,
-.Course header p {
+.page header p {
   font-size: var(--font-size-xs);
   color: var(--color-subtle-dark);
 }
 
-.Nav {
-  display: flex;
-  justify-content: end;
-  padding: 1rem 2rem;
-}
-
-.Footer {
-  background: var(--color-subtle-light);
-  width: 100%;
-  padding: 3rem 0;
-  margin-top: 5.5rem;
-  display: flex;
-  justify-content: center;
-}
-
-.Footer ul {
-  padding: 0;
-  padding-top: 2rem;
-  color: var(--color-subtle-dark);
-  margin: 0;
-}
-
-.Footer li {
-  display: inline;
-}
-
-Footer li:not(:last-child) {
-  margin-right: 1rem;
-}
-
-Footer li:not(:last-child):after {
-  content: "\B7";
-  margin-left: 1rem;
-}
-
-.button-auth {
+.button.auth {
   padding: 0.75rem 1.5rem;
   font-size: var(--font-size-xs);
   background: var(--color-subtle-medium);
@@ -200,7 +152,7 @@ Footer li:not(:last-child):after {
   cursor: pointer;
 }
 
-.button-primary {
+.button.primary {
   padding: 1rem 1.5rem;
   font-size: var(--font-size-xs);
   background: var(--color-theme);
@@ -215,33 +167,18 @@ Footer li:not(:last-child):after {
   line-height: 1.2;
 }
 
-.button-primary:hover {
+.button.primary:hover {
   background: var(--color-theme-dark);
 }
 
-.button-primary.icon {
+.button.primary.icon {
   display: inline-flex;
 }
 
-.button-primary.icon svg {
+.button.primary.icon svg {
   margin-left: 7px;
   height: 20px;
   width: 20px;
-}
-
-.spinner {
-  display: flex;
-  justify-content: center;
-}
-
-.spinner {
-  margin: 10rem auto;
-  width: 20px;
-  height: 20px;
-  border: 4px solid transparent;
-  border-top-color: var(--color-front);
-  border-radius: 50%;
-  animation: spinner 1s ease infinite;
 }
 
 @keyframes spinner {
@@ -252,132 +189,4 @@ Footer li:not(:last-child):after {
   to {
     transform: rotate(1turn);
   }
-}
-
-.Lesson401 {
-  display: flex;
-  justify-content: center;
-}
-
-.Lesson401 > div {
-  border: 1px solid var(--color-subtle-medium);
-  border-radius: var(--border-radius);
-  padding: 3rem 2em;
-  width: 66%;
-  font-size: var(--font-size-sm);
-  text-align: center;
-  color: var(--color-front)
-}
-
-.underline {
-  text-decoration: underline;
-}
-
-.ReactModal__Body--open,
-.ReactModal__Html--open {
-  overflow: hidden;
-}
-
-.ReactModal__Overlay--after-open {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.ReactModal__Content--after-open {
-  position: absolute;
-  background-color: var(--color-back);
-  border: 1px solid var(--color-subtle-medium);
-  border-radius: var(--border-radius);
-  top: 50%;
-  left: 50%;
-  right: auto;
-  bottom: auto;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-  padding: 3rem;
-  width: 300px;
-}
-
-.ReactModal__Content p {
-  margin: 2rem 0;
-  font-size: var(--font-size-xs);
-  color: var(--color-front);
-  text-align: center;
-}
-
-.ReactModal__Content .close {
-  display: flex;
-  justify-content: end;
-  position: relative;
-}
-
-.ReactModal__Content .close svg {
-  height: 20px;
-  width: 20px;
-  color: var(--color-subtle-dark);
-  position: absolute;
-  right: -1rem;
-  top: -1rem;
-}
-
-.ReactModal__Content .form {
-  display: flex;
-  flex-direction: column;
-}
-
-.ReactModal__Content input[type=text] {
-  padding: 1rem;
-  margin-bottom: 1rem;
-  font-size: var(--font-size-xs);
-  color: var(--color-front);
-  line-height: 1;
-  border: 1px solid var(--color-subtle-medium);
-  border-radius: var(--border-radius);
-}
-
-.ReactModal__Content button {
-  line-height: 1.4;
-}
-
-.ReactModal__Content button .loading {
-  width: 6px;
-  height: 6px;
-  border: 4px solid transparent;
-  border-top-color: var(--color-back);
-  border-radius: 50%;
-  animation: spinner 1s ease infinite;
-  display: inline-block;
-  margin-left: 0.5rem;
-}
-
-.ReactModal__Content input[type=text]:focus {
-  outline: var(--color-theme)
-}
-
-.ReactModal__Content .alert {
-  margin: 2rem 0 1rem;
-  padding: 2rem;
-  border-radius: var(--border-radius);
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
-.ReactModal__Content .alert.success {
-  background: var(--color-correct-light);
-  color: var(--color-correct-dark);
-}
-
-.ReactModal__Content .alert.error {
-  background: var(--color-incorrect-light);
-  color: var(--color-incorrect-dark);
-}
-
-.ReactModal__Content .alert svg {
-  height: 20px;
-  width: 20px;
-  flex-shrink: 0;
 }

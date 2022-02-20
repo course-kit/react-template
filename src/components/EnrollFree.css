@@ -1,0 +1,108 @@
+.ReactModal__Body--open,
+.ReactModal__Html--open {
+  overflow: hidden;
+}
+
+.ReactModal__Overlay--after-open {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ReactModal__Content--after-open {
+  position: absolute;
+  background-color: var(--color-back);
+  border: 1px solid var(--color-subtle-medium);
+  border-radius: var(--border-radius);
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  padding: 3rem;
+  width: 300px;
+}
+
+.ReactModal__Content p {
+  margin: 2rem 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-front);
+  text-align: center;
+}
+
+.ReactModal__Content .close {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.ReactModal__Content .close svg {
+  height: 20px;
+  width: 20px;
+  color: var(--color-subtle-dark);
+  position: absolute;
+  right: -1rem;
+  top: -1rem;
+}
+
+.ReactModal__Content .form {
+  display: flex;
+  flex-direction: column;
+}
+
+.ReactModal__Content input[type=text] {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: var(--font-size-xs);
+  color: var(--color-front);
+  line-height: 1;
+  border: 1px solid var(--color-subtle-medium);
+  border-radius: var(--border-radius);
+}
+
+.ReactModal__Content button {
+  line-height: 1.4;
+}
+
+.ReactModal__Content button .loading {
+  width: 6px;
+  height: 6px;
+  border: 4px solid transparent;
+  border-top-color: var(--color-back);
+  border-radius: 50%;
+  animation: spinner 1s ease infinite;
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.ReactModal__Content input[type=text]:focus {
+  outline: var(--color-theme)
+}
+
+.ReactModal__Content .alert {
+  margin: 2rem 0 1rem;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ReactModal__Content .alert.success {
+  background: var(--color-correct-light);
+  color: var(--color-correct-dark);
+}
+
+.ReactModal__Content .alert.error {
+  background: var(--color-incorrect-light);
+  color: var(--color-incorrect-dark);
+}
+
+.ReactModal__Content .alert svg {
+  height: 20px;
+  width: 20px;
+  flex-shrink: 0;
+}

@@ -1,15 +1,14 @@
-import { Routes, Route } from "react-router-dom"
-import Home from './pages/Home'
-import Course from './pages/Course'
-import Lesson from './pages/Lesson'
-import Footer from './components/Footer'
-import './App.css';
-import Nav from "./components/Nav";
-import { useAsync } from "react-async";
-import { fetchUser } from "./ck"
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Course from './pages/Course';
+import Lesson from './pages/Lesson';
+import Footer from './components/Footer';
+import Nav from './components/Nav';
+import { useAsync } from 'react-async';
+import { fetchUser } from './ck';
 
 function App() {
-  const { data, error, isPending } = useAsync(fetchUser)
+  const { data, error, isPending } = useAsync(fetchUser);
   if (data) {
     return (
       <div className="App">
@@ -18,7 +17,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/courses/:courseId" element={<Course />} />
-            <Route path="/courses/:courseId/lessons/:lessonId" element={<Lesson />} />
+            <Route
+              path="/courses/:courseId/lessons/:lessonId"
+              element={<Lesson />}
+            />
           </Routes>
         </main>
         <Footer />
@@ -26,14 +28,10 @@ function App() {
     );
   }
   if (error) {
-    return (
-      <div>Error</div>
-    )
+    return <div>Error</div>;
   }
   if (isPending) {
-    return (
-      <div className="spinner" />
-    )
+    return <div className="spinner" />;
   }
 }
 

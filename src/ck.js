@@ -1,5 +1,5 @@
 import { CourseKitClient } from '@coursekit/client'
-const ck = new CourseKitClient({ schoolId: 'sc2tbvt3pl' })
+const ck = new CourseKitClient({ schoolId: process.env.REACT_APP_SCHOOL_ID })
 
 const fetchUser = async () => {
   const { status, user } = await ck.loadUser()

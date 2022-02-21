@@ -1,10 +1,12 @@
-# Getting Started with Create React App
+# CourseKit React Template
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+It's recommended you have accounts with Netlify and Stripe to use the features.
+
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, you can run:netlify 
 
 ### `npm start`
 

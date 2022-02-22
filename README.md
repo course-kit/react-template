@@ -1,72 +1,56 @@
 # CourseKit React Template
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A minimal template for a CourseKit frontend site. 
 
-It's recommended you have accounts with Netlify and Stripe to use the features.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It's recommended you use this with Netlify so that the serverless enrollment function works out of the box.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:netlify 
+1. Fork this repo
+2. Clone locally
+3. Install modules
 
-### `npm start`
+```
+$ cd react-template
+$ npm i
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Configuration
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+To link the site to your CourseKit account, create a .env file by copying the example:
 
-### `npm test`
+```
+$ cp .env.example .env
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Now add all of the variables from the CourseKit Dashboard.
 
-### `npm run build`
+```
+REACT_APP_SCHOOL_ID=<your school ID>
+COURSE_1_ID=<your first course ID>
+COURSE_2_ID=<your second course ID>
+COURSE_1_ENROLLMENT_URL=<your first course enrollment URL>
+COURSE_2_ENROLLMENT_URL=<your second course enrollment URL>
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> Note: if you want to add more courses, continue the env variable naming convention above. Plus, add to the `courses` array in `functions/enroll.js`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Dev server
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Use the Netlify dev server so that functions work locally and you can enroll students.
 
-### `npm run eject`
+```
+$ netlify dev
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+By default this runs on port 8888.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+In the CourseKit dashboard, ensure that the School URL and Course URLs match the dev server URL so that log in and log out redirects work correctly.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+School URL
+http://localhost:8888
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Course URLs
+http://localhost:8888/courses/<your course id>
+```

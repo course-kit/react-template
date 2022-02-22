@@ -2,6 +2,8 @@
 
 A minimal template for a CourseKit frontend site. 
 
+Live demo: [https://demo.coursekit.dev](https://demo.coursekit.dev)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It's recommended you use this with Netlify so that the serverless enrollment function works out of the box.
 
 ## Installation

@@ -1,6 +1,6 @@
 {
   "name": "coursekit-react-template",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependencies": {
     "@coursekit/client": "^0.1.0",
     "@heroicons/react": "^1.0.5",

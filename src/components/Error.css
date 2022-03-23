@@ -1,0 +1,22 @@
+.Error {
+  display: flex;
+  justify-content: center;
+}
+
+.Error > div {
+  border: 1px solid var(--color-subtle-medium);
+  border-radius: var(--border-radius);
+  padding: 3rem 2em;
+  width: 66%;
+  font-size: var(--font-size-sm);
+  text-align: center;
+  color: var(--color-front)
+}
+
+.Error h1 {
+  margin-top: 0
+}
+
+.Error p {
+  color: var(--color-subtle-dark);
+}

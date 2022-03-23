@@ -4,6 +4,7 @@ import { fetchCourse } from '../ck'
 import Loading from '../components/Loading'
 import LessonSummary from '../components/LessonSummary'
 import CourseHeader from '../components/CourseHeader'
+import Error from '../components/Error'
 
 function Course() {
   let { courseId } = useParams()
@@ -36,7 +37,7 @@ function Course() {
     )
   }
   if (error) {
-    return <div>Error</div>
+    return <Error />
   }
   if (isPending) {
     return <Loading />

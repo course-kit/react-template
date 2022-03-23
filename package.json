@@ -1,6 +1,6 @@
 {
   "name": "coursekit-react-template",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "dependencies": {
     "@coursekit/client": "^0.1.0",
     "@heroicons/react": "^1.0.5",
@@ -16,7 +16,7 @@
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.4",
     "react-router-dom": "^6.2.1",
-    "react-scripts": "5.0.0",
+    "react-scripts": "^5.0.0",
     "stripe": "^8.203.0",
     "web-vitals": "^2.1.4"
   },

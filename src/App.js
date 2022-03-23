@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 import Nav from './components/Nav'
 import { useAsync } from 'react-async'
 import { fetchUser } from './ck'
+import Error from './components/Error'
 
 function App() {
   const { data, error, isPending } = useAsync(fetchUser)
@@ -28,7 +29,14 @@ function App() {
     )
   }
   if (error) {
-    return <div>Error</div>
+    return (
+      <div className="App">
+        <Nav />
+        <main>
+          <Error />
+        </main>
+      </div>
+    )
   }
   if (isPending) {
     return <div className="spinner" />

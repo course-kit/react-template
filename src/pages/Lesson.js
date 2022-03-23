@@ -6,6 +6,7 @@ import LessonForbidden from '../components/LessonForbidden'
 import '../components/LessonNoAccess.css'
 import LessonContent from '../components/LessonContent'
 import Loading from '../components/Loading'
+import Error from '../components/Error'
 
 function Lesson() {
   let { courseId, lessonId } = useParams()
@@ -43,7 +44,7 @@ function Lesson() {
     )
   }
   if (error) {
-    return <div>Error</div>
+    return <Error />
   }
   if (isPending) {
     return <Loading />

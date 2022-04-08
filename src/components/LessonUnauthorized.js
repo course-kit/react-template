@@ -7,7 +7,7 @@ function LessonUnauthorized(props) {
         Please{' '}
         <span
           className="underline cursor-pointer"
-          onClick={props.user.loginRedirect}
+          onClick={() => props.user.loginRedirect({ courseId: props.courseId })}
         >
           log in
         </span>{' '}

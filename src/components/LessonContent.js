@@ -9,7 +9,7 @@ function LessonContent(props) {
   const { vimeoId } = meta
   function VideoEmbed() {
     if (vimeoId) {
-      return <Vimeo video={meta.vimeoId} responsive />
+      return <Vimeo video={vimeoId} responsive />
     } else {
       return <div />
     }

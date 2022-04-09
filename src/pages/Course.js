@@ -30,6 +30,7 @@ function Course() {
               courseId={courseId}
               lesson={lesson}
               num={index + 1}
+              key={lesson.id}
             />
           ))}
         </div>

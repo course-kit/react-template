@@ -11,6 +11,7 @@ import Error from '../components/Error'
 function Lesson() {
   let { courseId, lessonId } = useParams()
   const { data, error, isPending } = useAsync({
+    watch: lessonId,
     promiseFn: fetchCourseLessonAndUser,
     courseId,
     lessonId,

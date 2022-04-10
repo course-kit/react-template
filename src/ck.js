@@ -1,7 +1,6 @@
 import { CourseKitClient } from '@coursekit/client'
 const ck = new CourseKitClient({
   schoolId: process.env.REACT_APP_SCHOOL_ID,
-  devMode: process.env.NODE_ENV === 'development'
   devMode: process.env.NODE_ENV === 'development',
 })
 

@@ -1,8 +1,8 @@
 {
   "name": "coursekit-react-template",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "dependencies": {
-    "@coursekit/client": "0.1.4",
+    "@coursekit/client": "0.2.0",
     "@heroicons/react": "^1.0.5",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",

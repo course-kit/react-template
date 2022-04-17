@@ -28,6 +28,17 @@ const fetchLesson = async ({ courseId, lessonId }) => {
   return { status, lesson }
 }
 
+const fetchCourseAndUser = async ({ courseId }) => {
+  const userResponse = await fetchUser()
+  const courseResponse = await fetchCourse({ courseId })
+  return {
+    courseStatus: courseResponse.status,
+    course: courseResponse.course,
+    userStatus: userResponse.status,
+    user: userResponse.user,
+  }
+}
+
 const fetchCourseLessonAndUser = async ({ courseId, lessonId }) => {
   const { status, user } = await fetchUser()
   const result = await Promise.all([
@@ -51,4 +62,5 @@ export {
   fetchLesson,
   fetchCourseLessonAndUser,
   fetchUser,
+  fetchCourseAndUser,
 }

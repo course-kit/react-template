@@ -24,7 +24,7 @@ function Lesson() {
         return <LessonUnauthorized courseId={courseId} user={user} />
       }
       if (lessonStatus === 403) {
-        return <LessonForbidden courseId={courseId} />
+        return <LessonForbidden courseId={courseId} user={user} />
       }
       if (lessonStatus === 200) {
         return <LessonContent course={course} lesson={lesson} />

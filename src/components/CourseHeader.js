@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { ChevronDoubleRightIcon } from '@heroicons/react/solid'
-import EnrollFree from './EnrollFree'
 
 function CourseHeader(props) {
   const nextLessonPath = `/courses/${props.course.id}/lessons/${props.course.nextLessonId}`
@@ -17,11 +16,12 @@ function CourseHeader(props) {
     )
   } else {
     return (
-      <EnrollFree
-        courseId={props.course.id}
-        text="Enroll now"
-        classes="button primary icon"
-      />
+      <button
+        className="button primary icon"
+        onClick={() => props.user.enrollRedirect(props.course.id)}
+      >
+        Enroll now
+      </button>
     )
   }
 }

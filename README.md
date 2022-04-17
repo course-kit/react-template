@@ -1,58 +1,39 @@
-# CourseKit React Template
+# CourseKit Vue Template
 
-A minimal template for a CourseKit frontend site. 
+A minimal React 17 template for a CourseKit frontend site.
 
-Live demo: [https://demo.coursekit.dev](https://demo.coursekit.dev)
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It's recommended you use this with Netlify so that the serverless enrollment function works out of the box.
+Live demo: [https://coursekit-react-template.netlify.app](https://coursekit-react-template.netlify.app)
 
 ## Installation
 
-1. Fork this repo
-2. Clone locally
-3. Install modules
-
-```
-$ cd react-template
-$ npm i
+```bash
+npm install
 ```
 
-## Configuration
+## Connecting school with .env
 
-To link the site to your CourseKit account, create a .env file by copying the example:
+1. Create an account at [https://coursekit.dev](https://coursekit.dev)
 
-```
-$ cp .env.example .env
-```
+2. In dashboard, go to *Schools* tab and get School ID.
 
-Now add all of the variables from the CourseKit Dashboard.
+3. Copy .env.example file
 
-```
-REACT_APP_SCHOOL_ID=<your school ID>
-COURSE_1_ID=<your first course ID>
-COURSE_2_ID=<your second course ID>
-COURSE_1_ENROLLMENT_URL=<your first course enrollment URL>
-COURSE_2_ENROLLMENT_URL=<your second course enrollment URL>
+```bash
+cp .env.example .env
 ```
 
-> Note: if you want to add more courses, continue the env variable naming convention above. Plus, add to the `courses` array in `functions/enroll.js`.
-
-## Dev server
-
-Use the Netlify dev server so that functions work locally and you can enroll students.
+4. Set `REACT_APP_SCHOOL_ID=` to your school ID in .env
 
 ```
-$ netlify dev
+REACT_APP_SCHOOL_ID=sc73jmdoi3
 ```
 
-By default this runs on port 8888.
+## Running server
 
-In the CourseKit dashboard, ensure that the School URL and Course URLs match the dev server URL so that log in and log out redirects work correctly.
-
+```bash
+npm run start
 ```
-School URL
-http://localhost:8888
 
-Course URLs
-http://localhost:8888/courses/<your course id>
-```
+## School URL
+
+By default, the dev server runs on port 3000. If you use a different poty, ensure that the School URL matches the dev server URL so that log in and log out redirects work correctly.

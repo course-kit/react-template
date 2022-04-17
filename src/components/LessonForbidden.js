@@ -1,15 +1,14 @@
-import EnrollFree from './EnrollFree'
-
 function LessonForbidden(props) {
   return (
     <div className="LessonNoAccess">
       <div>
         Please{' '}
-        <EnrollFree
-          courseId={props.courseId}
-          text="enroll"
-          classes="underline cursor-pointer"
-        />{' '}
+        <span
+          className="underline cursor-pointer"
+          onClick={() => props.user.enrollRedirect(props.courseId)}
+        >
+          enroll
+        </span>{' '}
         to view this lesson.
       </div>
     </div>

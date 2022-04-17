@@ -1,5 +1,3 @@
-import EnrollFree from './EnrollFree'
-
 function LessonUnauthorized(props) {
   return (
     <div className="LessonNoAccess">
@@ -12,11 +10,12 @@ function LessonUnauthorized(props) {
           log in
         </span>{' '}
         or{' '}
-        <EnrollFree
-          courseId={props.courseId}
-          text="enroll"
-          classes="underline cursor-pointer"
-        />{' '}
+        <span
+          className="underline cursor-pointer"
+          onClick={() => props.user.enrollRedirect(props.courseId)}
+        >
+          enroll
+        </span>{' '}
         to view this lesson.
       </div>
     </div>

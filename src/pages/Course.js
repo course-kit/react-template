@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { useAsync } from 'react-async'
-import { fetchCourse } from '../ck'
+import { fetchCourseAndUser } from '../ck'
 import Loading from '../components/Loading'
 import LessonSummary from '../components/LessonSummary'
 import CourseHeader from '../components/CourseHeader'
@@ -9,11 +9,11 @@ import Error from '../components/Error'
 function Course() {
   let { courseId } = useParams()
   const { data, error, isPending } = useAsync({
-    promiseFn: fetchCourse,
+    promiseFn: fetchCourseAndUser,
     courseId,
   })
   if (data) {
-    const { course } = data
+    const { course, user } = data
     const { title, lessons } = course
     return (
       <div className="Course page">
@@ -22,7 +22,7 @@ function Course() {
             <Link to={'/'}>Back to courses</Link>
           </p>
           <h1>{title}</h1>
-          <CourseHeader course={course} />
+          <CourseHeader course={course} user={user} />
         </header>
         <div>
           {lessons.map((lesson, index) => (

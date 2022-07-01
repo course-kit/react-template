@@ -1,4 +1,4 @@
-# CourseKit Vue Template
+# CourseKit React Template
 
 A minimal React 17 template for a CourseKit frontend site.
 
